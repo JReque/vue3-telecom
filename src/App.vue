@@ -1,12 +1,9 @@
-<script setup>
-	// import HelloWorld from "./components/HelloWorld.vue";
-</script>
+<script setup></script>
 
 <template>
-	<div class="bg-blue-500 text-white p-4">
-		This is a test div using Tailwind CSS
+	<div class="container mx-auto p-6">
+		<router-view />
 	</div>
-	<HelloWorld />
 </template>
 
 <style scoped></style>
