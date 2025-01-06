@@ -32,12 +32,11 @@
 	const { customers } = storeToRefs(customersStore);
 
 	const searchQuery = ref("");
-	const filteredCustomers = ref(customers.value);
+	const filteredCustomers = ref(null);
 
 	onBeforeMount(async () => {
-		console.log(customers.value);
 		await customersStore.getCustomers();
-		console.log(customers.value);
+		filteredCustomers.value = customersStore.customers;
 	});
 
 	const goToCustomerDetail = async (customerId) => {
@@ -51,7 +50,6 @@
 	};
 
 	const filterCustomers = () => {
-		console.log("filtering customers");
 		if (!searchQuery.value) {
 			filteredCustomers.value = customersStore.customers;
 		} else {
