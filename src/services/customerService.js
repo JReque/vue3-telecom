@@ -1,5 +1,5 @@
 export async function fetchCustomers() {
-    const response = await fetch('http://localhost:3000/customers');
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/customers`);
     if (!response.ok) {
       throw new Error('Failed to fetch customers');
     }
