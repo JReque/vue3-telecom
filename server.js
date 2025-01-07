@@ -93,11 +93,11 @@ const productsData = [
   }
 ];
 
-app.get('/customers', (_, res) => {
+app.get('/api/customers', (_, res) => {
   res.json(clientsData);
 });
 
-app.get('/customer/:id', (req, res) => {
+app.get('/api/customer/:id', (req, res) => {
   const customerId = req.params.id;
   const client = clientsData.find(client => client.customerId === customerId);
 
@@ -113,5 +113,5 @@ app.get('/customer/:id', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server is running at http://localhost:${port}/api`);
 });
