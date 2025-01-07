@@ -9,7 +9,7 @@
 				@input="filterCustomers"
 			/>
 		</div>
-		<ul class="space-y-4 mt-4" v-if="customersStore.customers.length">
+		<ul class="space-y-4 mt-4" v-if="customers.length">
 			<CustomerItem
 				v-for="customer in filteredCustomers"
 				:key="customer.customerId"
@@ -36,38 +36,35 @@
 
 	onBeforeMount(async () => {
 		await customersStore.getCustomers();
-		filteredCustomers.value = customersStore.customers;
+		filteredCustomers.value = customers.value;
 	});
 
 	const goToCustomerDetail = async (customerId) => {
-		const selectedCustomer = customersStore.customers.find(
+		const selectedCustomer = customers.value.find(
 			(customer) => customer.customerId === customerId
 		);
 
 		await customersStore.setSelectedCustomer(selectedCustomer);
-
 		router.push({ name: "customer-detail", params: { id: customerId } });
 	};
 
 	const filterCustomers = () => {
 		if (!searchQuery.value) {
-			filteredCustomers.value = customersStore.customers;
+			filteredCustomers.value = customers.value;
 		} else {
-			filteredCustomers.value = customersStore.customers.filter(
-				(customer) => {
-					return (
-						customer.givenName
-							.toLowerCase()
-							.includes(searchQuery.value.toLowerCase()) ||
-						customer.familyName1
-							.toLowerCase()
-							.includes(searchQuery.value.toLowerCase()) ||
-						customer.email
-							.toLowerCase()
-							.includes(searchQuery.value.toLowerCase())
-					);
-				}
-			);
+			filteredCustomers.value = customers.value.filter((customer) => {
+				return (
+					customer.givenName
+						.toLowerCase()
+						.includes(searchQuery.value.toLowerCase()) ||
+					customer.familyName1
+						.toLowerCase()
+						.includes(searchQuery.value.toLowerCase()) ||
+					customer.email
+						.toLowerCase()
+						.includes(searchQuery.value.toLowerCase())
+				);
+			});
 		}
 	};
 </script>
