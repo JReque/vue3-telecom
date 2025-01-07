@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "node server.js",
-    "start-prod": "fuser -k 3000/tcp && node server.js &"
+    "start-prod": "pm2 start server.js --name vue3-telecom"
   },
   "dependencies": {
     "@heroicons/vue": "^2.2.0",
